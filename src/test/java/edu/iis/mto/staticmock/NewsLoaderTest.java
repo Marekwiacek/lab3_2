@@ -1,7 +1,6 @@
 package edu.iis.mto.staticmock;
 
 import static org.junit.Assert.*;
-
 import static org.hamcrest.Matchers.equalTo;
 
 import org.junit.Before;
@@ -13,7 +12,6 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import edu.iis.mto.staticmock.reader.NewsReader;
-
 import static org.powermock.api.mockito.PowerMockito.*;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.times;
@@ -47,18 +45,25 @@ public class NewsLoaderTest {
 		newsLoader = new NewsLoader();
 		incomingNews = new IncomingNews();
 		
-		incomingNews.add(new IncomingInfo("A", SubsciptionType.A));
-		incomingNews.add(new IncomingInfo("B", SubsciptionType.A));
-		incomingNews.add(new IncomingInfo("C", SubsciptionType.C));
-		incomingNews.add(new IncomingInfo("NONE", SubsciptionType.NONE));
+		incomingNews.add(new IncomingInfo("a", SubsciptionType.A));
+		incomingNews.add(new IncomingInfo("a", SubsciptionType.B));
+		incomingNews.add(new IncomingInfo("a", SubsciptionType.C));
+		incomingNews.add(new IncomingInfo("a", SubsciptionType.NONE));
+		incomingNews.add(new IncomingInfo("a", SubsciptionType.NONE));
+		incomingNews.add(new IncomingInfo("a", SubsciptionType.NONE));
+		incomingNews.add(new IncomingInfo("a", SubsciptionType.NONE));
 		
 		when(newsReader.read()).thenReturn(incomingNews);
 	}	
 
 	@Test
 	public void testForPublicNews() {
-		publishableNews = newsLoader.loadNews();
-		assertThat(publishableNews.getPublicContent().size(), equalTo(1));
+		NewsLoader newsLoader = new NewsLoader();
+		PublishableNews publishableNews = newsLoader.loadNews();
+		
+		System.out.println(publishableNews.getSubscribentContent().size());
+		assertThat(publishableNews.getPublicContent().size(), equalTo(4));
+		assertThat(publishableNews.getSubscribentContent().size(), equalTo(3));
 	}
 	
 
