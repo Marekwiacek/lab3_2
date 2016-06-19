@@ -52,12 +52,12 @@ public class NewsLoaderTest {
 		incomingNews.add(new IncomingInfo("a", SubsciptionType.NONE));
 		incomingNews.add(new IncomingInfo("a", SubsciptionType.NONE));
 		incomingNews.add(new IncomingInfo("a", SubsciptionType.NONE));
-		
+			
 		when(newsReader.read()).thenReturn(incomingNews);
 	}	
 
 	@Test
-	public void testForPublicNews() {
+	public void testForNews() {
 		NewsLoader newsLoader = new NewsLoader();
 		PublishableNews publishableNews = newsLoader.loadNews();
 		
